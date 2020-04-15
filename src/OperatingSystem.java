@@ -117,6 +117,7 @@ public class OperatingSystem {
 		createProcess(3);
 		createProcess(4);
 		createProcess(5);
+		
 		FCFS();
 	}
 
