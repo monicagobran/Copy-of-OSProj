@@ -1,15 +1,21 @@
+import java.sql.Time;
+import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
+
 //import java.util.concurrent.Semaphore;
 
 
 public class Process extends Thread {
 	
 	public int processID;
-    ProcessState status=ProcessState.New;	
+    ProcessState status=ProcessState.New;
 
 	
 	public Process(int m) {
 		processID = m;
 	}
+	
 	@Override
 	public void run() {
 		
