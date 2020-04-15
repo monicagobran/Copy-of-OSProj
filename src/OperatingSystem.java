@@ -98,7 +98,6 @@ public class OperatingSystem {
 	public static <T> ArrayList<T> Order(ArrayList<T> list) {
 
 		ArrayList<T> newList = new ArrayList<T>();
-
 		for (T element : list) {
 
 			if (!newList.contains(element)) {
@@ -117,7 +116,6 @@ public class OperatingSystem {
 		createProcess(3);
 		createProcess(4);
 		createProcess(5);
-		
 		FCFS();
 	}
 
