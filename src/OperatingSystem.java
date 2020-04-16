@@ -126,6 +126,7 @@ public class OperatingSystem {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void FCFS() {
 		ArrayList<Process> Table = new ArrayList<Process>();
 		ArrayList<Process> reaadytable = new ArrayList<Process>();
@@ -140,13 +141,32 @@ public class OperatingSystem {
 				reaadytable.add(Table.get(i));
 			}
 		}
+		int j = 0;
 		OrderTable = Order(reaadytable);
+
 		for (int i = 0; i < OrderTable.size(); i++) {
+			if (OrderTable.get(i).status == ProcessState.Waiting) {
+				// System.out.println(OrderTable.get(i).status + " "+
+				// OrderTable.get(i).processID);
+				OrderTable.get(i).resume();
+			} else if (OrderTable.get(i).status == ProcessState.Ready) {
+				// System.out.println(OrderTable.get(i).status + " "+
+				// OrderTable.get(i).processID);
+				OrderTable.get(i).start();
+			}
+
 			while (OrderTable.get(i).isAlive()) {
 				// stop other threads
-				// disable interruptions for the current thread
-				// notify next thread when the current thread is done
-			}
+				while ((!(j == i)) && (j <= i)) {
+					OrderTable.get(j).setProcessState(OrderTable.get(j), ProcessState.Waiting);
+					// System.out.println(OrderTable.get(j).status + " "+
+					// OrderTable.get(j).processID);
+					OrderTable.get(j).suspend();
+					j++; // disable interruptions for the current thread??
+
+				}
+
+			} // remove not alive ??
 
 		}
 	}
