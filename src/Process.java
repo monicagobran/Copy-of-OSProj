@@ -4,6 +4,7 @@ public class Process extends Thread {
 
 	public int processID;
 	ProcessState status = ProcessState.New;
+	public boolean interrupted;
 
 	public Process(int m) {
 		processID = m;
@@ -36,10 +37,9 @@ public class Process extends Thread {
 		// TODO semwait for print
 		OperatingSystem.printText("Enter File Name: ");
 		// TODO sempost for print
-		// TODO sem wait for readInput
+		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String filename = OperatingSystem.TakeInput();
-		// TODO sempost for readInput
-		// OperatingSystem.printText(OperatingSystem.readFile(OperatingSystem.TakeInput()));
+		OperatingSystem.readInputSemaphore.semScannerPost();
 		// TODO semwait for readFile
 		String data = OperatingSystem.readFile(filename);
 		// TODO sempost for readFile
@@ -51,18 +51,30 @@ public class Process extends Thread {
 
 	private void process2() {
 
+		// TODO semwait for print
 		OperatingSystem.printText("Enter File Name: ");
+		// TODO sempost for print
+		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String filename = OperatingSystem.TakeInput();
+		OperatingSystem.readInputSemaphore.semScannerPost();
+		// TODO semwait for print
 		OperatingSystem.printText("Enter Data: ");
+		// TODO sempost for print
+		// TODO semwait for readFile
 		String data = OperatingSystem.TakeInput();
+		// TODO sempost for readFile
+		OperatingSystem.writeFsemaphore.semWriteFileWait(this);
 		OperatingSystem.writefile(filename, data);
+		OperatingSystem.writeFsemaphore.semWriteFilePost();
 		setProcessState(this, ProcessState.Terminated);
 	}
 
 	private void process3() {
 		int x = 0;
 		while (x < 301) {
+			// TODO semwait for print
 			OperatingSystem.printText(x + "\n");
+			// TODO sempost for print
 			x++;
 		}
 		setProcessState(this, ProcessState.Terminated);
@@ -72,7 +84,9 @@ public class Process extends Thread {
 
 		int x = 500;
 		while (x < 1001) {
+			// TODO semwait for print
 			OperatingSystem.printText(x + "\n");
+			// TODO sempost for print
 			x++;
 		}
 		setProcessState(this, ProcessState.Terminated);
@@ -80,10 +94,18 @@ public class Process extends Thread {
 
 	private void process5() {
 
+		// TODO semwait for print
 		OperatingSystem.printText("Enter LowerBound: ");
+		// TODO sempost for print
+		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String lower = OperatingSystem.TakeInput();
+		OperatingSystem.readInputSemaphore.semScannerPost();
+		// TODO semwait for print
 		OperatingSystem.printText("Enter UpperBound: ");
+		// TODO sempost for print
+		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String upper = OperatingSystem.TakeInput();
+		OperatingSystem.readInputSemaphore.semScannerPost();
 		int lowernbr = Integer.parseInt(lower);
 		int uppernbr = Integer.parseInt(upper);
 		String data = "";
@@ -91,7 +113,9 @@ public class Process extends Thread {
 		while (lowernbr <= uppernbr) {
 			data += lowernbr++ + "\n";
 		}
+		OperatingSystem.writeFsemaphore.semWriteFileWait(this);
 		OperatingSystem.writefile("P5.txt", data);
+		OperatingSystem.writeFsemaphore.semWriteFilePost();
 		setProcessState(this, ProcessState.Terminated);
 	}
 

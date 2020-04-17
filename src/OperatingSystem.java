@@ -9,62 +9,12 @@ import java.util.Scanner;
 public class OperatingSystem {
 
 	public static ArrayList<Thread> ProcessTable;
-	public boolean writeIntoFileSem;
-	public boolean readInputSem;
-	public ArrayList<Process> writeIntoFileQueue;
-	public ArrayList<Process> readInputQueue;
+	public static WriteFileSem writeFsemaphore;
+	public static ScannerSem readInputSemaphore;
 
 	public OperatingSystem() {
-		this.writeIntoFileSem = true;
-		this.readInputSem = true;
-		this.readInputQueue = new ArrayList<Process>();
-		this.writeIntoFileQueue = new ArrayList<Process>();
-	}
-
-	public void semWriteFileWait(Process p) {
-		if (this.writeIntoFileSem) {
-			// the resource is available, so the process can take it right away
-			this.writeIntoFileSem = false;
-		} else {
-			// the resource is busy, so push the process to the blocked queue
-			p.suspend();
-			Process.setProcessState(p, ProcessState.Waiting);
-			this.writeIntoFileQueue.add(p);
-
-		}
-
-	}
-
-	public void semtreadInputWait(Process p) {
-		if (this.readInputSem) {
-			// the resource is available, so the process can take it right away
-			this.writeIntoFileSem = false;
-		} else {
-			// the resource is busy, so push the process to the blocked queue
-			p.suspend();
-			Process.setProcessState(p, ProcessState.Waiting);
-			this.readInputQueue.add(p);
-
-		}
-	}
-
-	public static void semWriteFilePost(Process p) {
-		// set the state of the process to ready
-		// put in the ready queue
-		// organise with scheduler to resume the process not to run it from the
-		// beginning
-		// if the blocked queue is empty set the semaphore to true
-		// else take a process from the queue
-
-	}
-
-	public static void semreadInputPost(Process p) {
-		// set the state of the process to ready
-		// put in the ready queue
-		// organise with scheduler to resume the process not to run it from the
-		// beginning
-		// if the blocked queue is empty set the semaphore to true
-		// else take a process from the queue
+		this.writeFsemaphore = new WriteFileSem();
+		this.readInputSemaphore = new ScannerSem();
 	}
 
 //	public static int activeProcess= 0;
