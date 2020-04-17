@@ -95,7 +95,7 @@ public class OperatingSystem {
 		OrderTable = Order(reaadytable);
 
 		for (int i = 0; i < OrderTable.size(); i++) {
-			if (OrderTable.get(i).status == ProcessState.Waiting) {
+			if (OrderTable.get(i).status == ProcessState.Waiting || OrderTable.get(i).interrupted) {
 				// System.out.println(OrderTable.get(i).status + " "+
 				// OrderTable.get(i).processID);
 				OrderTable.get(i).resume();
