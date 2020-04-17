@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class OperatingSystem {
 
 	public static ArrayList<Thread> ProcessTable;
+	public static ArrayList<Process> reaadytable;
 	public boolean writeIntoFileSem;
 	public boolean readInputSem;
 	public ArrayList<Process> writeIntoFileQueue;
@@ -19,6 +20,7 @@ public class OperatingSystem {
 		this.readInputSem = true;
 		this.readInputQueue = new ArrayList<Process>();
 		this.writeIntoFileQueue = new ArrayList<Process>();
+		this.reaadytable = new ArrayList<Process>();
 	}
 
 	public void semWriteFileWait(Process p) {
@@ -127,9 +129,8 @@ public class OperatingSystem {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static void FCFS() {
+	public void FCFS() {
 		ArrayList<Process> Table = new ArrayList<Process>();
-		ArrayList<Process> reaadytable = new ArrayList<Process>();
 		ArrayList<Process> OrderTable = new ArrayList<Process>();
 
 		for (int i = 0; i < ProcessTable.size(); i++) {
@@ -138,11 +139,11 @@ public class OperatingSystem {
 
 		for (int i = 0; i < Table.size(); i++) {
 			if (Table.get(i).getProcessState(Table.get(i)) == ProcessState.Ready) {
-				reaadytable.add(Table.get(i));
+				this.reaadytable.add(Table.get(i));
 			}
 		}
 		int j = 0;
-		OrderTable = Order(reaadytable);
+		OrderTable = Order(this.reaadytable);
 
 		for (int i = 0; i < OrderTable.size(); i++) {
 			if (OrderTable.get(i).status == ProcessState.Waiting) {
@@ -186,13 +187,13 @@ public class OperatingSystem {
 
 	public static void main(String[] args) {
 		ProcessTable = new ArrayList<Thread>();
-
+		OperatingSystem o  = new OperatingSystem();
 		createProcess(1);
 		createProcess(2);
 		createProcess(3);
 		createProcess(4);
 		createProcess(5);
-		FCFS();
+		o.FCFS();
 	}
 
 }
