@@ -37,6 +37,7 @@ public class ScannerSem {
 			Process.setProcessState(waiting, ProcessState.Ready);
 			waiting.interrupted = true;
 			// TODO add the process to the ready queue
+			OperatingSystem.reaadytable.add(waiting);
 		}
 
 	}
