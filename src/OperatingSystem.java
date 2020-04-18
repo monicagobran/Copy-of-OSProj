@@ -132,7 +132,7 @@ public class OperatingSystem {
 	public void FCFS() {
 		ArrayList<Process> Table = new ArrayList<Process>();
 		ArrayList<Process> OrderTable = new ArrayList<Process>();
-
+ 
 		for (int i = 0; i < ProcessTable.size(); i++) {
 			Table.add((Process) ProcessTable.get(i));
 		}
