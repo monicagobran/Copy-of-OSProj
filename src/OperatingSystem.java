@@ -73,8 +73,8 @@ public class OperatingSystem {
 		Process p = new Process(processID);
 		ProcessTable.add(p);
 		Process.setProcessState(p, ProcessState.Ready);
-
-//		p.start();
+//TODO comment the next line
+		p.start();
 
 	}
 
@@ -138,12 +138,12 @@ public class OperatingSystem {
 	public static void main(String[] args) {
 		ProcessTable = new ArrayList<Thread>();
 		OperatingSystem o = new OperatingSystem();
-		createProcess(1);
+		// TODO //createProcess(1);
 		createProcess(2);
-		createProcess(3);
-		createProcess(4);
+		// TODO //createProcess(3);
+		// TODO //createProcess(4);
 		createProcess(5);
-		o.FCFS();
+		// TODO //o.FCFS();
 	}
 
 }
