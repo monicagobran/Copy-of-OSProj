@@ -34,6 +34,7 @@ public class Process extends Thread {
 	}
 
 	private void process1() {
+		System.out.println("process1");
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter File Name: ");
 		OperatingSystem.printTextSemaphore.semPrintPost();
@@ -54,6 +55,7 @@ public class Process extends Thread {
 	}
 
 	private void process2() {
+		System.out.println("process2");
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter File Name: ");
 		OperatingSystem.printTextSemaphore.semPrintPost();
@@ -80,6 +82,7 @@ public class Process extends Thread {
 	}
 
 	private void process3() {
+		System.out.println("process3");
 		int x = 0;
 		while (x < 301) {
 			
@@ -93,7 +96,7 @@ public class Process extends Thread {
 	}
 
 	private void process4() {
-
+		System.out.println("process4");
 		int x = 500;
 		while (x < 1001) {
 			
@@ -107,7 +110,7 @@ public class Process extends Thread {
 	}
 
 	private void process5() {
-
+		System.out.println("process5");
 
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter LowerBound: ");
