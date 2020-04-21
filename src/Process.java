@@ -12,7 +12,7 @@ public class Process extends Thread {
 
 	@Override
 	public void run() {
-
+this.status = ProcessState.Running;
 		switch (processID) {
 		case 1:
 			process1();
@@ -81,28 +81,31 @@ public class Process extends Thread {
 
 	private void process3() {
 		int x = 0;
+		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		while (x < 301) {
 			
-			OperatingSystem.printTextSemaphore.semPrintWait(this);
+			
 			OperatingSystem.printText(x + "\n");
-			OperatingSystem.printTextSemaphore.semPrintPost();	
+				
 			
 			x++;
 		}
+		OperatingSystem.printTextSemaphore.semPrintPost();
+		
 		setProcessState(this, ProcessState.Terminated);
 	}
 
 	private void process4() {
 
 		int x = 500;
-		while (x < 1001) {
-			
-			OperatingSystem.printTextSemaphore.semPrintWait(this);
-			OperatingSystem.printText(x + "\n");
-			OperatingSystem.printTextSemaphore.semPrintPost();	
-			
+		
+		OperatingSystem.printTextSemaphore.semPrintWait(this);
+		while (x < 1001) {			
+			OperatingSystem.printText(x + "\n");					
 			x++;
 		}
+		OperatingSystem.printTextSemaphore.semPrintPost();
+		
 		setProcessState(this, ProcessState.Terminated);
 	}
 
@@ -115,7 +118,7 @@ public class Process extends Thread {
 
 		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String lower = OperatingSystem.TakeInput();
-		//TODO sempost for scanner
+		OperatingSystem.readInputSemaphore.semScannerPost();
 
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter UpperBound: ");
@@ -142,6 +145,7 @@ public class Process extends Thread {
 	public static void setProcessState(Process p, ProcessState s) {
 		p.status = s;
 		if (s == ProcessState.Terminated) {
+			System.out.println("Terminating Process "+ p.processID);
 			OperatingSystem.ProcessTable.remove(OperatingSystem.ProcessTable.indexOf(p));
 		}
 	}

@@ -142,12 +142,36 @@ public class OperatingSystem {
 	public static void main(String[] args) {
 		ProcessTable = new ArrayList<Thread>();
 		OperatingSystem o = new OperatingSystem();
-		// TODO //createProcess(1);
+		createProcess(1);
 		createProcess(2);
-		// TODO //createProcess(3);
-		// TODO //createProcess(4);
-		createProcess(5);
+		createProcess(3);
+		createProcess(4);
+//		createProcess(5);
 		// TODO //o.FCFS();
+
+		// to test without FCFS
+		while(!ProcessTable.isEmpty()) {
+			for (int i = 0; i < ProcessTable.size(); i++) {
+				if(ProcessTable.size()>i) {
+					Process p = (Process) ProcessTable.get(i);
+					if(!ProcessTable.isEmpty() && p.status.equals(ProcessState.Ready) && p.interrupted) {
+						System.out.println("Resuming Process "+p.processID);
+						p.status = ProcessState.Running;
+						p.interrupted = false;
+						p.resume();
+					}
+				}
+			}
+			boolean terminate = true;
+			for (int i = 0; i < ProcessTable.size(); i++) {
+				Process p = (Process) ProcessTable.get(i);
+				if(!ProcessTable.isEmpty() && !p.status.equals(ProcessState.Terminated)) {
+					terminate = false;
+				}
+			}
+			if (terminate)
+				break;			
+		}
 	}
 
 }

@@ -14,17 +14,17 @@ public class ScannerSem {
 			System.out.println("The scanner resource is available");
 			// the resource is available, so the process can take it right away
 			this.available = false;
-			System.out.println("The scanner resource is now taken");
+			System.out.println("The scanner resource is now taken by process " +p.processID);
 		} else {
 			// the resource is busy, so push the process to the blocked queue
 			System.out.println("The scanner resource is busy");
-			p.suspend();
+//			p.suspend();
 			System.out.println("The process is suspended id: " + p.processID);
 			Process.setProcessState(p, ProcessState.Waiting);
 			System.out.println("The process state is now : " + p.status);
 			this.readInputQueue.add(p);
 			System.out.println("The size of the scanner queue is: " + this.readInputQueue.size());
-
+			p.suspend();
 		}
 
 	}
