@@ -34,47 +34,59 @@ public class Process extends Thread {
 	}
 
 	private void process1() {
-		// TODO semwait for print
+		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter File Name: ");
-		// TODO sempost for print
+		OperatingSystem.printTextSemaphore.semPrintPost();
+		
 		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String filename = OperatingSystem.TakeInput();
 		OperatingSystem.readInputSemaphore.semScannerPost();
-		// TODO semwait for readFile
+		
+		OperatingSystem.readFileSemaphore.semReadWait(this);
 		String data = OperatingSystem.readFile(filename);
-		// TODO sempost for readFile
-		// TODO semwait for print
+		OperatingSystem.readFileSemaphore.semReadPost();
+		
+		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText(data);
-		// TODO sempost for print
+		OperatingSystem.printTextSemaphore.semPrintPost();
+		
 		setProcessState(this, ProcessState.Terminated);
 	}
 
 	private void process2() {
-
-		// TODO semwait for print
+		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter File Name: ");
-		// TODO sempost for print
+		OperatingSystem.printTextSemaphore.semPrintPost();
+
 		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String filename = OperatingSystem.TakeInput();
 		OperatingSystem.readInputSemaphore.semScannerPost();
-		// TODO semwait for print
+
+		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter Data: ");
-		// TODO sempost for print
-		// TODO semwait for readFile
+		OperatingSystem.printTextSemaphore.semPrintPost();		
+
+		// TODO semwait
+		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String data = OperatingSystem.TakeInput();
-		// TODO sempost for readFile
+		OperatingSystem.readInputSemaphore.semScannerPost();
+		// TODO sempost
+		
 		OperatingSystem.writeFsemaphore.semWriteFileWait(this);
 		OperatingSystem.writefile(filename, data);
 		OperatingSystem.writeFsemaphore.semWriteFilePost();
+		
 		setProcessState(this, ProcessState.Terminated);
 	}
 
 	private void process3() {
 		int x = 0;
 		while (x < 301) {
-			// TODO semwait for print
+			
+			OperatingSystem.printTextSemaphore.semPrintWait(this);
 			OperatingSystem.printText(x + "\n");
-			// TODO sempost for print
+			OperatingSystem.printTextSemaphore.semPrintPost();	
+			
 			x++;
 		}
 		setProcessState(this, ProcessState.Terminated);
@@ -84,9 +96,11 @@ public class Process extends Thread {
 
 		int x = 500;
 		while (x < 1001) {
-			// TODO semwait for print
+			
+			OperatingSystem.printTextSemaphore.semPrintWait(this);
 			OperatingSystem.printText(x + "\n");
-			// TODO sempost for print
+			OperatingSystem.printTextSemaphore.semPrintPost();	
+			
 			x++;
 		}
 		setProcessState(this, ProcessState.Terminated);
@@ -94,18 +108,23 @@ public class Process extends Thread {
 
 	private void process5() {
 
-		// TODO semwait for print
+
+		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter LowerBound: ");
-		// TODO sempost for print
+		OperatingSystem.printTextSemaphore.semPrintPost();
+
 		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String lower = OperatingSystem.TakeInput();
-		OperatingSystem.readInputSemaphore.semScannerPost();
-		// TODO semwait for print
+		//TODO sempost for scanner
+
+		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter UpperBound: ");
-		// TODO sempost for print
+		OperatingSystem.printTextSemaphore.semPrintPost();
+
 		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String upper = OperatingSystem.TakeInput();
 		OperatingSystem.readInputSemaphore.semScannerPost();
+		
 		int lowernbr = Integer.parseInt(lower);
 		int uppernbr = Integer.parseInt(upper);
 		String data = "";
@@ -116,6 +135,7 @@ public class Process extends Thread {
 		OperatingSystem.writeFsemaphore.semWriteFileWait(this);
 		OperatingSystem.writefile("P5.txt", data);
 		OperatingSystem.writeFsemaphore.semWriteFilePost();
+		
 		setProcessState(this, ProcessState.Terminated);
 	}
 

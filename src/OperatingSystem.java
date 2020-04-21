@@ -12,10 +12,14 @@ public class OperatingSystem {
 	public static ArrayList<Process> reaadytable;
 	public static WriteFileSem writeFsemaphore;
 	public static ScannerSem readInputSemaphore;
+	public static ReadFileSem readFileSemaphore;
+	public static PrintSem printTextSemaphore;
 
 	public OperatingSystem() {
 		this.writeFsemaphore = new WriteFileSem();
 		this.readInputSemaphore = new ScannerSem();
+		this.readFileSemaphore = new ReadFileSem();
+		this.printTextSemaphore = new PrintSem();
 		this.reaadytable = new ArrayList<Process>();
 	}
 
