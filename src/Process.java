@@ -34,6 +34,7 @@ this.status = ProcessState.Running;
 	}
 
 	private void process1() {
+		System.out.println("process1");
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter File Name: ");
 		OperatingSystem.printTextSemaphore.semPrintPost();
@@ -54,6 +55,7 @@ this.status = ProcessState.Running;
 	}
 
 	private void process2() {
+		System.out.println("process2");
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter File Name: ");
 		OperatingSystem.printTextSemaphore.semPrintPost();
@@ -80,6 +82,7 @@ this.status = ProcessState.Running;
 	}
 
 	private void process3() {
+		System.out.println("process3");
 		int x = 0;
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		while (x < 301) {
@@ -96,7 +99,7 @@ this.status = ProcessState.Running;
 	}
 
 	private void process4() {
-
+		System.out.println("process4");
 		int x = 500;
 		
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
@@ -110,7 +113,7 @@ this.status = ProcessState.Running;
 	}
 
 	private void process5() {
-
+		System.out.println("process5");
 
 		OperatingSystem.printTextSemaphore.semPrintWait(this);
 		OperatingSystem.printText("Enter LowerBound: ");
