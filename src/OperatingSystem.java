@@ -78,7 +78,7 @@ public class OperatingSystem {
 		ProcessTable.add(p);
 		Process.setProcessState(p, ProcessState.Ready);
 		reaadytable.add(p);
-//TODO comment the next line
+
 		//p.start();
 
 	}
@@ -143,7 +143,7 @@ public class OperatingSystem {
 		createProcess(2);
 		createProcess(3);
 		createProcess(4);
-//		createProcess(5);
+		createProcess(5);
 		// TODO //o.FCFS();
 
 		// to test without FCFS

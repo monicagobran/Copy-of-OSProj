@@ -68,11 +68,9 @@ this.status = ProcessState.Running;
 		OperatingSystem.printText("Enter Data: ");
 		OperatingSystem.printTextSemaphore.semPrintPost();		
 
-		// TODO semwait
 		OperatingSystem.readInputSemaphore.semScannerWait(this);
 		String data = OperatingSystem.TakeInput();
 		OperatingSystem.readInputSemaphore.semScannerPost();
-		// TODO sempost
 		
 		OperatingSystem.writeFsemaphore.semWriteFileWait(this);
 		OperatingSystem.writefile(filename, data);
