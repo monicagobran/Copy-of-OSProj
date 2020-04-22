@@ -41,20 +41,23 @@ public class WriteFileSem {
 			System.out.println("the write file resource is now available and the blocked queue is empty");
 			this.available = true;
 		} else {
-			System.out.println("There are processes int the blocked queue with size: " + this.writeIntoFileQueue.size());
+			System.out
+					.println("There are processes int the blocked queue with size: " + this.writeIntoFileQueue.size());
 			Process waiting = this.writeIntoFileQueue.remove(0);
 			System.out.println("The process in turn is: " + waiting.processID);
 			Process.setProcessState(waiting, ProcessState.Ready);
 			System.out.println("The process state is now: " + waiting.status);
 			waiting.interrupted = true;
 			System.out.println("The process interrupted state is: " + waiting.interrupted);
-			//TODO remove the next line
+			// TODO remove the next line
 			OperatingSystem.ProcessTable.add(waiting);
-			System.out.println("the process is added to the ready queue of size: " + OperatingSystem.ProcessTable.size());
-			
+			System.out
+					.println("the process is added to the ready queue of size: " + OperatingSystem.ProcessTable.size());
+
 			// TODO add the process to the ready queue
 			OperatingSystem.reaadytable.add(waiting);
-			System.out.println("the process is added to the ready queue of size: " + OperatingSystem.reaadytable.size());
+			System.out
+					.println("the process is added to the ready queue of size: " + OperatingSystem.reaadytable.size());
 		}
 
 	}

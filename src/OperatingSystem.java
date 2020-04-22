@@ -79,7 +79,7 @@ public class OperatingSystem {
 		Process.setProcessState(p, ProcessState.Ready);
 		reaadytable.add(p);
 
-		//p.start();
+		// p.start();
 
 	}
 
@@ -88,23 +88,25 @@ public class OperatingSystem {
 
 		ArrayList<Process> OrderTable = new ArrayList<Process>();
 
-		
 		int j = 0;
 		OrderTable = Order(this.reaadytable);
-
-		for (int i = 0; i < OrderTable.size(); i++) {
-			System.out.println(OrderTable.get(i).processID + " is " + OrderTable.get(i).getProcessState(OrderTable.get(i)));
+		int i = 0;
+		while (!OrderTable.isEmpty()) {
+			System.out.println(
+					OrderTable.get(i).processID + " is " + OrderTable.get(i).getProcessState(OrderTable.get(i)));
 			if (OrderTable.get(i).status == ProcessState.Waiting || OrderTable.get(i).interrupted) {
-				 
+
 				OrderTable.get(i).resume();
-				OrderTable.get(i).setProcessState(OrderTable.get(i),ProcessState.Ready);
-				System.out.println(OrderTable.get(i).processID + " is " + OrderTable.get(i).getProcessState(OrderTable.get(i)));
+				OrderTable.get(i).setProcessState(OrderTable.get(i), ProcessState.Ready);
+				System.out.println(
+						OrderTable.get(i).processID + " is " + OrderTable.get(i).getProcessState(OrderTable.get(i)));
 
 			} else if (OrderTable.get(i).status == ProcessState.Ready) {
-				 
+
 				OrderTable.get(i).start();
-				OrderTable.get(i).setProcessState(OrderTable.get(i),ProcessState.Running);
-				System.out.println(OrderTable.get(i).processID + " is " + OrderTable.get(i).getProcessState(OrderTable.get(i)));
+				OrderTable.get(i).setProcessState(OrderTable.get(i), ProcessState.Running);
+				System.out.println(
+						OrderTable.get(i).processID + " is " + OrderTable.get(i).getProcessState(OrderTable.get(i)));
 
 			}
 
@@ -112,13 +114,16 @@ public class OperatingSystem {
 				// stop other threads
 				while ((!(j == i)) && (j <= i)) {
 					OrderTable.get(j).setProcessState(OrderTable.get(j), ProcessState.Waiting);
-					System.out.println(OrderTable.get(i).processID + " is " + OrderTable.get(i).getProcessState(OrderTable.get(i)));
+					System.out.println(OrderTable.get(i).processID + " is "
+							+ OrderTable.get(i).getProcessState(OrderTable.get(i)));
 					OrderTable.get(j).suspend();
-					j++; // disable interruptions for the current thread??
+					j++;
 
 				}
 
-			} // remove not alive ??
+			}
+			// remove not alive
+			OrderTable.remove(i);
 
 		}
 	}
@@ -144,15 +149,15 @@ public class OperatingSystem {
 		createProcess(3);
 		createProcess(4);
 		createProcess(5);
-		// TODO //o.FCFS();
+		o.FCFS();
 
 		// to test without FCFS
-		while(!ProcessTable.isEmpty()) {
+		while (!ProcessTable.isEmpty()) {
 			for (int i = 0; i < ProcessTable.size(); i++) {
-				if(ProcessTable.size()>i) {
+				if (ProcessTable.size() > i) {
 					Process p = (Process) ProcessTable.get(i);
-					if(!ProcessTable.isEmpty() && p.status.equals(ProcessState.Ready) && p.interrupted) {
-						System.out.println("Resuming Process "+p.processID);
+					if (!ProcessTable.isEmpty() && p.status.equals(ProcessState.Ready) && p.interrupted) {
+						System.out.println("Resuming Process " + p.processID);
 						p.status = ProcessState.Running;
 						p.interrupted = false;
 						p.resume();
@@ -162,12 +167,12 @@ public class OperatingSystem {
 			boolean terminate = true;
 			for (int i = 0; i < ProcessTable.size(); i++) {
 				Process p = (Process) ProcessTable.get(i);
-				if(!ProcessTable.isEmpty() && !p.status.equals(ProcessState.Terminated)) {
+				if (!ProcessTable.isEmpty() && !p.status.equals(ProcessState.Terminated)) {
 					terminate = false;
 				}
 			}
 			if (terminate)
-				break;			
+				break;
 		}
 
 	}

@@ -14,7 +14,7 @@ public class ScannerSem {
 			System.out.println("The scanner resource is available");
 			// the resource is available, so the process can take it right away
 			this.available = false;
-			System.out.println("The scanner resource is now taken by process " +p.processID);
+			System.out.println("The scanner resource is now taken by process " + p.processID);
 		} else {
 			// the resource is busy, so push the process to the blocked queue
 			System.out.println("The scanner resource is busy");
@@ -49,7 +49,7 @@ public class ScannerSem {
 			System.out.println("The process state is now: " + waiting.status);
 			waiting.interrupted = true;
 			System.out.println("The process interrupted state is: " + waiting.interrupted);
-			//TODO remove the next line
+			// TODO remove the next line
 			OperatingSystem.ProcessTable.add(waiting);
 			System.out
 					.println("the process is added to the ready queue of size: " + OperatingSystem.ProcessTable.size());
