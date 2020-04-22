@@ -152,29 +152,6 @@ public class OperatingSystem {
 		o.FCFS();
 
 		// to test without FCFS
-//		while (!ProcessTable.isEmpty()) {
-//			for (int i = 0; i < ProcessTable.size(); i++) {
-//				if (ProcessTable.size() > i) {
-//					Process p = (Process) ProcessTable.get(i);
-//					if (!ProcessTable.isEmpty() && p.status.equals(ProcessState.Ready) && p.interrupted) {
-//						System.out.println("Resuming Process " + p.processID);
-//						p.status = ProcessState.Running;
-//						p.interrupted = false;
-//						p.resume();
-//					}
-//				}
-//			}
-//			boolean terminate = true;
-//			for (int i = 0; i < ProcessTable.size(); i++) {
-//				Process p = (Process) ProcessTable.get(i);
-//				if (!ProcessTable.isEmpty() && !p.status.equals(ProcessState.Terminated)) {
-//					terminate = false;
-//				}
-//			}
-//			if (terminate)
-//				break;
-//		}
-
 //		while (!reaadytable.isEmpty()) {
 //			for (int i = 0; i < reaadytable.size(); i++) {
 //				if (reaadytable.size() > i) {
@@ -198,6 +175,28 @@ public class OperatingSystem {
 //				break;
 //		}
 
+//		while (!ProcessTable.isEmpty()) {
+//		for (int i = 0; i < ProcessTable.size(); i++) {
+//			if (ProcessTable.size() > i) {
+//				Process p = (Process) ProcessTable.get(i);
+//				if (!ProcessTable.isEmpty() && p.status.equals(ProcessState.Ready) && p.interrupted) {
+//					System.out.println("Resuming Process " + p.processID);
+//					p.status = ProcessState.Running;
+//					p.interrupted = false;
+//					p.resume();
+//				}
+//			}
+//		}
+//		boolean terminate = true;
+//		for (int i = 0; i < ProcessTable.size(); i++) {
+//			Process p = (Process) ProcessTable.get(i);
+//			if (!ProcessTable.isEmpty() && !p.status.equals(ProcessState.Terminated)) {
+//				terminate = false;
+//			}
+//		}
+//		if (terminate)
+//			break;
+//	}
 	}
 
 }
